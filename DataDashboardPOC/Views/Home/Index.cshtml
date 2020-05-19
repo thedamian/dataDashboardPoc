@@ -1,8 +1,79 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+<style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+</style>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Appointments</h1>
+    <p>Updates every 5 minutes</p>
+    <canvas id="dataChart" width="400" height="400"></canvas>
 </div>
+
+<script>
+    var ctx = document.getElementById('dataChart').getContext('2d');
+    var myChart;
+    var colors = [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+    ];
+
+    function LoadData() {
+         fetch('/api/dataapi')
+  .then(response => response.json())
+       .then(dataReturned => {
+           console.log("dataReturned")
+           console.dir(dataReturned);
+
+           let labels = [];
+           let datasets = [];
+           for (var i = 0; i < dataReturned.length; i++) {
+                labels.push(dataReturned[i].time);
+               datasets.push({
+                   label: "Time: " + dataReturned[i].time,
+                   data: [ dataReturned[i].insu_A, dataReturned[i].insu_B, dataReturned[i].insu_C],
+                    backgroundColor: colors,
+                    borderColor: colors,
+                    borderWidth: 1
+                });
+           }
+
+           var graphData = {
+               labels: labels,
+               datasets: datasets
+           }
+           console.log("graphData")
+           console.log(graphData);
+
+             myChart = new Chart(ctx, {
+                type: 'bar',
+                data:graphData,
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+
+       });
+    }
+
+    LoadData(); // Load it the first time
+
+    setTimeout(LoadData(), 300000); // reload every 5 minutes
+
+</script>

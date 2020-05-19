@@ -36,3 +36,4 @@ DataDashboardPOC/msbuild.wrn
 # Visual Studio 2015
 DataDashboardPOC/.vs/
 .vs/
+/DataDashboardPOC/Properties/PublishProfiles/DataDashboardPoC - Web Deploy.pubxml

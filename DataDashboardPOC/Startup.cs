@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using DataDashboardPOC.Repositories;
 
 namespace DataDashboardPOC
 {
@@ -24,6 +27,18 @@ namespace DataDashboardPOC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddControllers();
+
+            //Add Repos
+            services.AddTransient<IDataRepository, DataRepository>();
+            services.AddCors();
+
+            // ENFORCE HTTPS 
+            services.Configure<MvcOptions>(options => options.Filters.Add(new RequireHttpsAttribute()));
+            
+            
+            //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

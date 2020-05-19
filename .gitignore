@@ -1,0 +1,38 @@
+﻿*.swp
+*.*~
+DataDashboardPOC/project.lock.json
+DataDashboardPOC/.DS_Store
+*.pyc
+DataDashboardPOC/nupkg/
+nupkg
+packages/
+
+# Visual Studio Code
+DataDashboardPOC/.vscode
+
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+DataDashboardPOC/[Dd]ebug/
+DataDashboardPOC/[Dd]ebugPublic/
+DataDashboardPOC/[Rr]elease/
+DataDashboardPOC/[Rr]eleases/
+DataDashboardPOC/x64/
+DataDashboardPOC/x86/
+DataDashboardPOC/build/
+DataDashboardPOC/bld/
+DataDashboardPOC/[Bb]in/
+DataDashboardPOC/[Oo]bj/
+DataDashboardPOC/[Oo]ut/
+DataDashboardPOC/msbuild.log
+DataDashboardPOC/msbuild.err
+DataDashboardPOC/msbuild.wrn
+
+# Visual Studio 2015
+DataDashboardPOC/.vs/
+.vs/
